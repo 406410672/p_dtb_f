@@ -50,9 +50,9 @@ class Master(object):
 
     def onMessage(self, message):
         '''
-                :param message:
-                :return:
-                '''
+        :param message:
+        :return:
+        '''
         self.logger.error(message)
         request_obj = json.loads(message)
         response = dict()

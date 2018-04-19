@@ -24,7 +24,7 @@
 
 ### 1.注册，首次启动需要注册，并获取clientId
 ##### 请求格式:
-```json
+```python
 {
     'request_type' : 'register',
     'client_name'：'',
@@ -32,7 +32,7 @@
 }
 ```
 ##### 返回格式:
-```json
+```python
 {
     'client_id' : '',
     'server_status'：''
@@ -41,7 +41,7 @@
 
 ### 2.HEARTBEAT心跳检测（每30秒上传一次）
 ##### 请求格式:
-```json
+```python
 {
     'request_type' : 'heartbeat',
     'client_id'：'',
@@ -49,13 +49,13 @@
 }
 ```
 ##### 返回格式:
-```json
+```python
 {
     'server_status'：''
 }
 ```
 ##### 有报错则返回
-```javascript
+```python
 {
     'error' : [错误类型]
     'server_status' :
@@ -67,12 +67,23 @@
 
 
 ### **3.获取任务**
-
-
-----
-
-# 任务队列模块
-##### 任务存储数据结构
+##### 请求格式:
+```python
+{
+    'request_type' : 'application_tasks',
+    'client_id'：'',
+    'request_time'：    #时间戳的形式
+    'task_name' : ''  #可选填，可指定爬取的任务
+}
+```
+##### 返回格式:
+```python
+{
+    'task_items' ： [获取到的任务格式],  #在下面  如果没有任务，则数组大小为0
+    'task_nums' : 100, #返回的任务个数   如果没有任务，则为0
+}
+```
+###### 获取到的任务格式：
 ```python
 {
     "type": "GET",
@@ -83,6 +94,7 @@
       "type" : "xpath",
       "priority" : 100 ,
       "pattern" : "./li/div[@class=\"category-items\"]/a[@class=\"category-name\"]"
+      "content" : {"category_name":"./text()","category_url":"./@href"}
     } ,{
       "type" : "json",
       "priority" : 200 ,
@@ -93,12 +105,53 @@
       "parttern" : "g_page_config = ({.*})"
     },{
       "type" : "module",
+      "module_name" : "taobao_category_parse",
       "priority" : 1
     }
     ],
-    "storage_rule":[{
-      "mongodb":"taobao.itemdetail"
-    }]
+    "storage_rule":{
+      "type" : "task"
+      "mongodb":"taobao.category_info"
+    }
+}
+
+```
+----
+
+# 任务队列模块
+##### 任务存储数据结构
+```python
+{
+    "type": "GET",
+    "task_name": "淘宝商品分类获取",
+    "domain" : "www.taobao.com",
+    "headers" : "",
+    "parse_rule" : [{
+      "type" : "xpath",
+      "priority" : 100 ,
+      "pattern" : "./li/div[@class=\"category-items\"]/a[@class=\"category-name\"]"
+      "content" : {"category_name":"./text()","category_url":"./@href"}
+    } ,{
+      "type" : "json",
+      "priority" : 200 ,
+      "parttern" : "items.price"
+    } ,{
+      "type" : "regular",
+      "priority" : 300 ,
+      "parttern" : "g_page_config = ({.*})"
+    },{
+      "type" : "module",
+      "module_name" : "taobao_category_parse",
+      "priority" : 1
+    }
+    ],
+    "storage_rule":{
+      "type" : "task",
+      "item" : {
+            "task_name" : "淘宝商品二级分类获取",
+            "mongodb":"taobao.category_info"
+      }
+    }
 }
 ```
 

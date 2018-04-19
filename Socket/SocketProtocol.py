@@ -1,7 +1,11 @@
 # msg type, could be REGISTER, UNREGISTER and HEARTBEAT
 MSG_TYPE	= 'request_type'
 
+#请求时间
 REQUEST_TIME = 'request_time'
+
+#请求任务
+Application_Tasks = 'application_tasks'
 
 # send register
 REGISTER 	= 'register'
