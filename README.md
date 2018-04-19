@@ -4,10 +4,8 @@
 ![fram-png](frame.png)
 
 **框架内通信协议：** TCP。传输json格式的字符串。
-
-**Master的IP、Port：** 通过BaseModule.Configloader的master_host与master_port变量获得
-
-**首次爬取URL:** https://www.taobao.com/markets/tbhome/market-list
+<br>**Master的IP、Port：** 通过BaseModule.Configloader的master_host与master_port变量获得
+<br>**首次爬取URL:** https://www.taobao.com/markets/tbhome/market-list
 
 **python目录结构**
 > - Authorizes:登陆相关、验证码识别相关
