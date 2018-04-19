@@ -53,6 +53,7 @@ class Master(object):
                 :param message:
                 :return:
                 '''
+        self.logger.error(message)
         request_obj = json.loads(message)
         response = dict()
         response[pc.SERVER_STATUS] = self.server_status

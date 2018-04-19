@@ -39,7 +39,7 @@ class HTSocketClient(object):
         s.sendall(bytes(message, encoding='utf-8'))
         response = s.recv(1024 * 8)
         s.close()
-        return response
+        return str(response, encoding='utf-8')
 
 
 

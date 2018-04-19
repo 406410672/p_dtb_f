@@ -1,5 +1,5 @@
 
-# 分布式爬虫爬虫架构
+# p_dtb_f
 
 ![fram-png](frame.png)
 
@@ -54,8 +54,8 @@
     'server_status'：''
 }
 ```
-###### 有报错则返回
-```json
+##### 有报错则返回
+```javascript
 {
     'error' : [错误类型]
     'server_status' :
@@ -63,3 +63,42 @@
 ```
 **错误类型:**
 > * err_not_found：服务器端未发现该client(需要重新注册)
+
+
+
+### **3.获取任务**
+
+
+----
+
+# 任务队列模块
+##### 任务存储数据结构
+```python
+{
+    "type": "GET",
+    "task_name": "淘宝商品信息获取",
+    "domain" : "www.taobao.com",
+    "headers" : "",
+    "parse_rule" : [{
+      "type" : "xpath",
+      "priority" : 100 ,
+      "pattern" : "./li/div[@class=\"category-items\"]/a[@class=\"category-name\"]"
+    } ,{
+      "type" : "json",
+      "priority" : 200 ,
+      "parttern" : "items.price"
+    } ,{
+      "type" : "regular",
+      "priority" : 300 ,
+      "parttern" : "g_page_config = ({.*})"
+    },{
+      "type" : "module",
+      "priority" : 1
+    }
+    ],
+    "storage_rule":[{
+      "mongodb":"taobao.itemdetail"
+    }]
+}
+```
+

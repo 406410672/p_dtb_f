@@ -46,18 +46,29 @@ class HTSocketServer(object):
 
     def processingConnection(self, cnn):
         content = str()
-        try:
-            while True:
-                recv = cnn.recv(1)
-                if recv == '\0':
-                    break
-                content += recv
-            ask = self.callback(content)
-            # self.logger.debug('ask :{}'.format(ask))
-            cnn.sendall(ask)
-            cnn.close()
-        except Exception as error:
-            print('processing Connection error:{}'.format(error))
+
+        while True:
+            recv = cnn.recv(1)
+            recv = str(recv, encoding='utf-8')
+            if  '\0' in recv:
+                break
+            content += recv
+        ask = self.callback(content)
+        cnn.sendall(bytes(ask, encoding='utf-8'))
+        cnn.close()
+        # try:
+        #     while True:
+        #         recv = cnn.recv(100)
+        #         recv = str(recv, encoding='utf-8')
+        #         if  '\0' in recv:
+        #             break
+        #         content += recv
+        #     print(content)
+        #     ask = self.callback(content)
+        #     cnn.sendall(ask)
+        #     cnn.close()
+        # except Exception as error:
+        #     print('processing Connection error:{}'.format(error))
 
     def start(self):
         thread = Thread(target=self.startListening, name='startListening')
