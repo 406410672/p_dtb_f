@@ -36,7 +36,7 @@ class HTSocketClient(object):
         message = message + '\0'
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((self.ip, self.port))
-        s.sendall(message)
+        s.sendall(bytes(message, encoding='utf-8'))
         response = s.recv(1024 * 8)
         s.close()
         return response
