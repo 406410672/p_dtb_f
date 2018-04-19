@@ -3,7 +3,7 @@
 
 ![fram-png](frame.png)
 
-**框架内通信协议：** TCP。传输json格式的字符串。
+**框架内通信协议：** TCP。传输json格式的字符串，用UTF-8编码。
 <br>**Master的IP、Port：** 通过BaseModule.Configloader的master_host与master_port变量获得
 <br>**首次爬取URL:** https://www.taobao.com/markets/tbhome/market-list
 

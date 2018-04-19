@@ -44,8 +44,8 @@ class HTSocketClient(object):
 
 
 if __name__ == '__main__':
-    htS = HTSocketClient(ip='localhost', port=20015)
-    response = htS.send('''
+    htS = HTSocketClient(ip='192.168.62.112', port=20050)
+    content = '''
     sk = socket.socket()
     sk.connect(("127.0.0.1", 8888))  # 主动初始化与服务器端的连接
     while True:
@@ -55,5 +55,7 @@ if __name__ == '__main__':
             break
         accept_data = str(sk.recv(1024), encoding="utf8")
         print("".join(("接收内容：", accept_data)))
-    sk.close()0''')
+    sk.close()0'''
+    bytes()
+    response = htS.send()
     print(response)

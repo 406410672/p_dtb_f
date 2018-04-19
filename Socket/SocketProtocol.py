@@ -47,7 +47,7 @@ SERVER_PAUSED 	= 'server_paused'
 
 SERVER_SHUTDOWN	= 'server_shutdown'
 
-SERVER_CONNECTION_LOST	= 'client_connection_lost'
+ERROR_CONNECTION_LOST	= 'error_connection_lost'
 
 ERROR = 'error'
 

@@ -6,10 +6,9 @@ try:
     from configparser import ConfigParser  # py3
 except:
     from ConfigParser import ConfigParser  # py2
-from Class import *
+from BaseModule.Class import *
 
 class Configloader():
-
     def __init__(self):
         pwd = os.path.split(os.path.abspath(__file__))[0]
         config_path = os.path.join(pwd,'Config.ini')
@@ -18,6 +17,7 @@ class Configloader():
     '''
     const
     '''
+
     @LazyProperty
     def account_expiretime(self):
         return int(self.config_file.get('Const','account_expiretime'))

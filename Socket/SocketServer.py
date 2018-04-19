@@ -23,7 +23,6 @@ import sys,os
 import socket
 
 from threading import Thread
-sys.setdefaultencoding('utf8')
 
 class HTSocketServer(object):
     def __init__(self, callback, ip, port):
