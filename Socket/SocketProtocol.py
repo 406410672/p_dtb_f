@@ -1,6 +1,8 @@
 # msg type, could be REGISTER, UNREGISTER and HEARTBEAT
 MSG_TYPE	= 'request_type'
 
+REQUEST_TIME = 'request_time'
+
 # send register
 REGISTER 	= 'register'
 
