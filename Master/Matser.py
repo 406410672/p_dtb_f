@@ -18,7 +18,7 @@ from BaseModule.Configloader import Configloader
 from Socket.SocketServer import HTSocketServer
 from Socket import SocketProtocol as pc
 from BaseModule import DateProcessing as dp
-
+from Master.Task.TaskManager import TaskManager
 CLIENT_LOST_TIME = 60 * 10
 class Master(object):
     def __init__(self):
@@ -27,6 +27,7 @@ class Master(object):
                                            ip=self.configLoader.master_host,
                                            port=self.configLoader.master_port)
         self.logger = HTLogger('master.log')
+        self.task_manager = TaskManager()
         self.clients = dict()
         self.server_status = pc.SERVER_RUNNING
 
@@ -73,7 +74,6 @@ class Master(object):
 
         # 注销
         if request_obj[pc.MSG_TYPE] == pc.UNREGISTER:
-            # self.clients.remove(clientId)
             del self.clients[clientid]
             return json.dumps(response)
         # 心跳
@@ -82,13 +82,19 @@ class Master(object):
             return json.dumps(response)
         # 申请任务
         elif request_obj[pc.MSG_TYPE] == pc.APPLICATION_TASKS:
-            pass
+            self.get_task_opration()
         # 上传任务
-
+        elif request_obj[pc.MSG_TYPE] == pc.UPLOAD_TASKS:
+            self.upload_task_operation()
         else :
             return json.dumps(response)
 
+    def get_task_opration(self, request_obj):
+        response = self.get_task_opration(request_obj)
 
+    def upload_task_operation(self, request_obj):
+        response = self.task_manager.upload_task(request_obj)
+        pass
 
     def period_check(self):
         while True:
