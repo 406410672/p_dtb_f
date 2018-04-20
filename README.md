@@ -69,6 +69,7 @@
 ### **3.获取任务**
 > * 当爬虫端启动后每10分钟向Matser请求任务，一旦获取到任务则不断进行请求申请。
 > * 假如获取不到任务则暂停，5分钟后再进行请求申请任务。
+> * 每次只会返回同一个网站同一个级别的任务
 ##### 请求格式:
 ```python
 {
@@ -81,29 +82,28 @@
 ##### 返回格式:
 ```python
 {
+    "type": "GET",
+    "task_name": "淘宝商品信息获取",
+    "domain" : "www.taobao.com",
     'task_items' ： [获取到的任务格式],  # 数据类型，如果没有任务，则数组大小为0
     'task_nums' : 100, #返回的任务个数   如果没有任务，则为0
+    "storage_rule":[存储规则],
+    "parse_rule" : [解析规则]
 }
 ```
 ###### [获取到的任务格式]：
 ```python
 {
-    "type": "GET",
-    "task_name": "淘宝商品信息获取",
-    "domain" : "www.taobao.com",
-    "headers" : "",
-    "parse_rule" : [解析规则]
-    "storage_rule":[存储规则]
+    "url" : "",
 }
 ```
 ###### [解析规则]
 
  1. 数据类型：数组
- 2. type: 解析类型（[module]类型为特例，需要在爬虫端手动实现[module_name]的方法）
+ 2. type: 解析类型（目前只用处理 [xpath]与[module]类型）
  3. priority:优先级，数字越小则优先级越高。根据优先级顺序进行解析。
  4. parttern:解析语句
  5. content:最后的结果
-
 ```
 [{
       "type" : "xpath",
@@ -113,7 +113,7 @@
     } ,{
       "type" : "json",
       "priority" : 200 ,
-    "content" : {"category_name":1,"category_url":2}
+      "content" : {"category_name":1,"category_url":2}
     } ,{
       "type" : "regular",
       "priority" : 300 ,
@@ -129,6 +129,8 @@
 ###### [存储规则]
  1. handler : 处理对象。[matser]则需要上传给master处理,[handler]则需要交给crawler处理
  2. target : 存储在哪里
+目前有两种主要存储规则。如果爬取到下一级URl则需要上传到Master。
+如果爬取到的是最终的目标数据，则需要crawler端进行上传数据到Mongodb或者后期的HBase列式数据库。
 ```
 {
       "handler" : "master",
@@ -146,6 +148,36 @@ or
 ```
 
 ### **3.上传任务**
+
+> * 当爬虫端根据url下载完数据并且根据[解析规则]解析完数据后进行上传
+
+##### 请求格式:
+```python
+{
+    'request_type' : 'upload_tasks',
+    'client_id'：'',
+    'request_time'：    #时间戳的形式,
+    'task_name' : ''  , #任务的名字需要上传
+    'url' : '',         #任务的url需要上传
+    'items' :[获取到的数据] #字典形式
+}
+```
+##### 返回格式:
+```python
+{
+    'server_status'：''
+}
+```
+##### 有报错则返回
+```python
+{
+    'error' : [错误类型]
+    'server_status' :
+}
+```
+**错误类型:**
+> * error_upload_task：上传任务到Master失败，需要重新上传
+
 ----
 
 # 任务队列模块
@@ -155,6 +187,7 @@ or
     "type": "GET",
     "task_name": "淘宝商品分类获取",
     "domain": "www.taobao.com",
+    "url" : "",
     "headers": "",
     "parse_rule": [
         {
@@ -183,11 +216,10 @@ or
         }
     ],
     "storage_rule": {
-        "type": "task",
-        "item": {
-            "task_name": "淘宝商品二级分类获取",
-            "mongodb": "taobao.category_info"
-        }
+        "handler" : "crawler",
+        "target" : "mongodb",
+        "db" : "taobao",
+        "table":"category_info"
     }
 }
 ```

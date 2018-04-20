@@ -1,64 +1,35 @@
-# msg type, could be REGISTER, UNREGISTER and HEARTBEAT
+#TypeKey
+## msg type, could be REGISTER, UNREGISTER and HEARTBEAT
 MSG_TYPE	= 'request_type'
 
-#请求时间
-REQUEST_TIME = 'request_time'
-
-#请求任务
+#typeValue
+## 请求任务
 Application_Tasks = 'application_tasks'
-
-# send register
+## 注册爬虫机
 REGISTER 	= 'register'
-
-# unregister client with id assigned by master
-UNREGISTER 	= 'unregister'
-
-# send heart beat to server with id
+## send heart beat to server with id
 HEARTBEAT	= 'heartbeat'
+## 上传任务
+UPLOAD_TASKS = 'upload_tasks'
 
-# notify master paused with id
-PAUSED 		= 'pause'
-
-# notify master resumed with id
-RESUMED		= 'resumed'
-
-# notify master SHUTDOWN with id
-SHUTDOWN		= 'shutdown'
-
-# client id key word
-CLIENT_ID 	= 'client_id'
-
-# client name key word
-CLIENT_NAME 	= 'client_name'
-
-# server status key word
-ACTION_REQUIRED	= 'action_required'
-
-# server require pause
-PAUSE_REQUIRED	= 'pause_required'
-
-# server require pause
-RESUME_REQUIRED	= 'resume_required'
-
-# server require shutdown
-SHUTDOWN_REQUIRED	= 'shutdown_required'
 
 # server status key word
 SERVER_STATUS	= 'server_status'
-
-# server status values
+# server status value
+## server status values
 SERVER_RUNNING	= 'server_running'
-
 SERVER_PAUSED 	= 'server_paused'
-
 SERVER_SHUTDOWN	= 'server_shutdown'
 
-ERROR_CONNECTION_LOST	= 'error_connection_lost'
 
+
+# error key
 ERROR = 'error'
 
-# client id not found, then it needs to register itself
+# errorValue
+## 爬虫端失去连接
+ERROR_CONNECTION_LOST	= 'error_connection_lost'
+## client id not found, then it needs to register itself
 ERR_NOT_FOUND	= 'error_not_found'
-
-
-
+## 上传任务失败
+ERR_UPLOAD_TASK	= 'error_upload_task'

@@ -37,7 +37,14 @@ class HTSocketClient(object):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((self.ip, self.port))
         s.sendall(bytes(message, encoding='utf-8'))
-        response = s.recv(1024 * 8)
+
+        response = str()
+        while True:
+            recv = s.recv(1)
+            recv = str(recv, encoding='utf-8')
+            if  '\0' in recv:
+                break
+            response += recv
         s.close()
         return str(response, encoding='utf-8')
 

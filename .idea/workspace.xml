@@ -2,9 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d536fb7-69b4-4cf7-9c59-ac0b30bf40ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Master/Matser.py" afterPath="$PROJECT_DIR$/Master/Matser.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/p_dtb_f.iml" afterPath="$PROJECT_DIR$/.idea/p_dtb_f.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Socket/SocketClient.py" afterPath="$PROJECT_DIR$/Socket/SocketClient.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Socket/SocketProtocol.py" afterPath="$PROJECT_DIR$/Socket/SocketProtocol.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Socket/SocketServer.py" afterPath="$PROJECT_DIR$/Socket/SocketServer.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/Master/Matser.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+              <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
               <folding>
                 <element signature="e#433#442#0" expanded="true" />
               </folding>
@@ -31,12 +35,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="350">
-                <caret line="89" column="21" lean-forward="false" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
+              <first_editor relative-caret-position="332">
+                <caret line="156" column="34" lean-forward="false" selection-start-line="156" selection-start-column="22" selection-end-line="156" selection-end-column="34" />
                 <folding />
               </first_editor>
               <second_editor>
@@ -56,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SocketProtocol.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SocketProtocol.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Socket/SocketProtocol.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="21" column="31" lean-forward="true" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+            <state relative-caret-position="179">
+              <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -69,8 +73,8 @@
       <file leaf-file-name="SocketServer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Socket/SocketServer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="250">
-              <caret line="53" column="21" lean-forward="true" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+            <state relative-caret-position="550">
+              <caret line="65" column="33" lean-forward="true" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
               <folding>
                 <element signature="e#442#455#0" expanded="true" />
               </folding>
@@ -81,10 +85,17 @@
       <file leaf-file-name="SocketClient.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Socket/SocketClient.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+            <state relative-caret-position="432">
+              <caret line="35" column="18" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="32" />
               <folding />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="frame.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frame.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
           </provider>
         </entry>
       </file>
@@ -117,10 +128,10 @@
         <option value="$PROJECT_DIR$/BaseModule/Configloader.py" />
         <option value="$PROJECT_DIR$/Crawler/__init__.py" />
         <option value="$PROJECT_DIR$/Crawler/ClientInit.py" />
-        <option value="$PROJECT_DIR$/Socket/SocketServer.py" />
-        <option value="$PROJECT_DIR$/Socket/SocketClient.py" />
         <option value="$PROJECT_DIR$/Master/Matser.py" />
         <option value="$PROJECT_DIR$/Socket/SocketProtocol.py" />
+        <option value="$PROJECT_DIR$/Socket/SocketClient.py" />
+        <option value="$PROJECT_DIR$/Socket/SocketServer.py" />
         <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
@@ -781,11 +792,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frame.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/BaseModule/HTLogger.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="722">
@@ -860,12 +866,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Socket/SocketClient.py">
+    <entry file="file://$PROJECT_DIR$/Master/Matser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="40" column="17" lean-forward="true" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
-          <folding />
+        <state relative-caret-position="120">
+          <caret line="53" column="16" lean-forward="false" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
+          <folding>
+            <element signature="e#433#442#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frame.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Crawler/ClientInit.py">
@@ -876,20 +889,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Master/Matser.py">
+    <entry file="file://$PROJECT_DIR$/Socket/SocketClient.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="53" column="16" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="53" selection-end-column="16" />
-          <folding>
-            <element signature="e#433#442#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="432">
+          <caret line="35" column="18" lean-forward="false" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="332">
+            <caret line="156" column="34" lean-forward="false" selection-start-line="156" selection-start-column="22" selection-end-line="156" selection-end-column="34" />
+            <folding />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Socket/SocketServer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="53" column="21" lean-forward="true" selection-start-line="53" selection-start-column="21" selection-end-line="53" selection-end-column="21" />
+        <state relative-caret-position="550">
+          <caret line="65" column="33" lean-forward="true" selection-start-line="65" selection-start-column="33" selection-end-line="65" selection-end-column="33" />
           <folding>
             <element signature="e#442#455#0" expanded="true" />
           </folding>
@@ -898,22 +922,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Socket/SocketProtocol.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="21" column="31" lean-forward="true" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        <state relative-caret-position="179">
+          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="12" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="350">
-            <caret line="89" column="21" lean-forward="false" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
-            <folding />
-          </first_editor>
-          <second_editor>
-            <markdownNavigatorState />
-          </second_editor>
         </state>
       </provider>
     </entry>

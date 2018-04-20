@@ -54,6 +54,7 @@ class HTSocketServer(object):
                 break
             content += recv
         ask = self.callback(content)
+        ask = ask + '\0'
         cnn.sendall(bytes(ask, encoding='utf-8'))
         cnn.close()
         # try:
