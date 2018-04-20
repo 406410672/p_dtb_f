@@ -46,7 +46,7 @@ class HTSocketClient(object):
                 break
             response += recv
         s.close()
-        return str(response, encoding='utf-8')
+        return response
 
 
 

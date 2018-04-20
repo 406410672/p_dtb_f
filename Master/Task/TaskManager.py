@@ -8,14 +8,24 @@
 # @Describe: Desc
 # @Issues  : Issues
 
-import os
+from Master.Task.TaskOperation.GetTaskOperation import GetTaskOperation
 
-class TaskManager(object):
+from Master.Task.TaskOperation.UploadTaskOperation import UploadTaskOperation
+
+
+class TaskManager(UploadTaskOperation, GetTaskOperation):
     def __init__(self):
-        pass
+        UploadTaskOperation.__init__(self)
+        GetTaskOperation.__init__(self)
 
     def get_task(self, request_obj):
-        pass
+        response = self._get_task_operation(request_obj)
+        return response
 
     def upload_task(self, request_obj):
         pass
+
+
+if __name__ == '__main__':
+    tm = TaskManager()
+    print(tm.get_task({'',''}))

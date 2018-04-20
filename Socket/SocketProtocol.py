@@ -40,8 +40,12 @@ ERR_UPLOAD_TASK	= 'error_upload_task'
 CLIENT_ID 	= 'CLIENT_ID'
 ## client name key word
 CLIENT_NAME 	= 'CLIENT_NAME'
-
-
+## 解析规则
+PARSE_RULE = 'parse_rule'
+## 存储规则
+STORAGE_RULE = 'storage_rule'
+## 请求时间
+REQUEST_TIME = 'request_time'
 
 # 暂时不适用
 # unregister client with id assigned by master

@@ -76,7 +76,7 @@
     'request_type' : 'application_tasks',
     'client_id'：'',
     'request_time'：    #时间戳的形式
-    'task_name' : ''  #可选填，可指定爬取的任务
+    'task_id' : ''  #可选填，可指定爬取的任务
 }
 ```
 ##### 返回格式:
@@ -84,6 +84,7 @@
 {
     "type": "GET",
     "task_name": "淘宝商品信息获取",
+    "task_id" : '',   #任务id
     "domain" : "www.taobao.com",
     'task_items' ： [获取到的任务格式],  # 数据类型，如果没有任务，则数组大小为0
     'task_nums' : 100, #返回的任务个数   如果没有任务，则为0
@@ -158,6 +159,7 @@ or
     'client_id'：'',
     'request_time'：    #时间戳的形式,
     'task_name' : ''  , #任务的名字需要上传
+    'task_id' :'' ,     #任务id
     'url' : '',         #任务的url需要上传
     'items' :[获取到的数据] #字典形式
 }

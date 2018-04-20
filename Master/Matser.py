@@ -23,7 +23,7 @@ CLIENT_LOST_TIME = 60 * 10
 class Master(object):
     def __init__(self):
         self.configLoader = Configloader()
-        self.socketServer = HTSocketServer(callback=self.onMessage,
+        self.socketServer = HTSocketServer(callback=self.on_message,
                                            ip=self.configLoader.master_host,
                                            port=self.configLoader.master_port)
         self.logger = HTLogger('master.log')
@@ -41,7 +41,7 @@ class Master(object):
         i += 1
         return str(i)
 
-    def onMessage(self, message):
+    def on_message(self, message):
         '''
         :param message:
         :return:
@@ -63,12 +63,16 @@ class Master(object):
             response[pc.CLIENT_ID] = clientid
             return json.dumps(response)
 
-        clientid = request_obj.get(pc.CLIENT_ID)
+        clientid = str(request_obj.get(pc.CLIENT_ID))
         response = dict()
-        if clientid is None:
+        response[pc.SERVER_STATUS] = self.server_status
+
+
+
+        if clientid is None or self.clients.get(clientid) is None:
             response[pc.ERROR] = pc.ERR_NOT_FOUND
             return json.dumps(response)
-        elif self.clients[clientid]['status'] == pc.ERROR_CONNECTION_LOST:
+        elif self.clients.get(clientid).get('status') == pc.ERROR_CONNECTION_LOST:
             response[pc.ACTION_REQUIRED] = pc.RESUME_REQUIRED
             return response
 
@@ -78,27 +82,32 @@ class Master(object):
             return json.dumps(response)
         # 心跳
         elif request_obj[pc.MSG_TYPE] == pc.HEARTBEAT:
+            print(self.clients)
             self.clients[clientid]['time'] = time.time()
             return json.dumps(response)
         # 申请任务
         elif request_obj[pc.MSG_TYPE] == pc.APPLICATION_TASKS:
-            self.get_task_opration()
+            app_tasks_response = self.get_task_opration(request_obj=request_obj)
+            response.update(app_tasks_response)
+            return json.dumps(response)
         # 上传任务
         elif request_obj[pc.MSG_TYPE] == pc.UPLOAD_TASKS:
-            self.upload_task_operation()
-        else :
+            upload_task_response = self.upload_task_operation(request_obj=request_obj)
+            response.update(upload_task_response)
+            return json.dumps(response)
+        else:
             return json.dumps(response)
 
     def get_task_opration(self, request_obj):
-        response = self.get_task_opration(request_obj)
+        response = self.task_manager.get_task(request_obj)
+        return response
 
     def upload_task_operation(self, request_obj):
         response = self.task_manager.upload_task(request_obj)
-        pass
+        return response
 
     def period_check(self):
         while True:
-            log = str()
             clientlens = self.clients.__len__()
             if clientlens == 0:
                 log = 'not any crawler'
@@ -121,6 +130,7 @@ class Master(object):
 
             self.logger.debug(log)
             time.sleep(30)
+
 
 def run():
     master = Master()
