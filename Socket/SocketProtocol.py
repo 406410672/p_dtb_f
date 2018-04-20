@@ -33,3 +33,24 @@ ERROR_CONNECTION_LOST	= 'error_connection_lost'
 ERR_NOT_FOUND	= 'error_not_found'
 ## 上传任务失败
 ERR_UPLOAD_TASK	= 'error_upload_task'
+
+
+# Other key
+## client id key word
+CLIENT_ID 	= 'CLIENT_ID'
+## client name key word
+CLIENT_NAME 	= 'CLIENT_NAME'
+
+
+
+# 暂时不适用
+# unregister client with id assigned by master
+UNREGISTER 	= 'UNREGISTER'
+# server status key word
+ACTION_REQUIRED	= 'ACTION_REQUIRED'
+# server require pause
+PAUSE_REQUIRED	= 'PAUSE_REQUIRED'
+# server require pause
+RESUME_REQUIRED	= 'RESUME_REQUIRED'
+# server require shutdown
+SHUTDOWN_REQUIRED	= 'SHUTDOWN_REQUIRED'

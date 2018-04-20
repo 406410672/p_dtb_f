@@ -7,14 +7,6 @@
 # @Software: PyCharm Community Edition
 # @Describe: Desc
 # @Issues  : Issues
-try:
-    import platform
-    if platform.python_version()[0] == 2:
-        import sys
-        reload(sys)
-        sys.setdefaultencoding('utf8')
-except Exception as error:
-    print('setdefaultencoding error:{}'.format(error))
 
 import os
 import json
@@ -57,6 +49,7 @@ class Master(object):
         request_obj = json.loads(message)
         response = dict()
         response[pc.SERVER_STATUS] = self.server_status
+        # 注册
         if request_obj[pc.MSG_TYPE] == pc.REGISTER:
             clientid = self.get_clientid()
             clientName = request_obj[pc.CLIENT_NAME]
@@ -78,16 +71,20 @@ class Master(object):
             response[pc.ACTION_REQUIRED] = pc.RESUME_REQUIRED
             return response
 
-        #注销
+        # 注销
         if request_obj[pc.MSG_TYPE] == pc.UNREGISTER:
             # self.clients.remove(clientId)
             del self.clients[clientid]
             return json.dumps(response)
-        #心跳
+        # 心跳
         elif request_obj[pc.MSG_TYPE] == pc.HEARTBEAT:
             self.clients[clientid]['time'] = time.time()
             return json.dumps(response)
-        elif request_obj[pc.MSG_TYPE] == pc.Application_Tasks
+        # 申请任务
+        elif request_obj[pc.MSG_TYPE] == pc.APPLICATION_TASKS:
+            pass
+        # 上传任务
+
         else :
             return json.dumps(response)
 
