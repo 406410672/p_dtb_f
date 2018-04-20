@@ -78,15 +78,20 @@ class Master(object):
             response[pc.ACTION_REQUIRED] = pc.RESUME_REQUIRED
             return response
 
+        #注销
         if request_obj[pc.MSG_TYPE] == pc.UNREGISTER:
             # self.clients.remove(clientId)
             del self.clients[clientid]
             return json.dumps(response)
+        #心跳
         elif request_obj[pc.MSG_TYPE] == pc.HEARTBEAT:
             self.clients[clientid]['time'] = time.time()
             return json.dumps(response)
-        else:
+        elif request_obj[pc.MSG_TYPE] == pc.Application_Tasks
+        else :
             return json.dumps(response)
+
+
 
     def period_check(self):
         while True:

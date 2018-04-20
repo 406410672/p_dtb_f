@@ -4,7 +4,7 @@ MSG_TYPE	= 'request_type'
 
 #typeValue
 ## 请求任务
-Application_Tasks = 'application_tasks'
+APPLICATION_TASKS = 'application_tasks'
 ## 注册爬虫机
 REGISTER 	= 'register'
 ## send heart beat to server with id
