@@ -25,6 +25,7 @@ SERVER_SHUTDOWN	= 'server_shutdown'
 
 # error key
 ERROR = 'error'
+ERROR_INFO = 'error_info'
 
 # errorValue
 ## 爬虫端失去连接

@@ -9,9 +9,8 @@
 # @Issues  : Issues
 
 from Master.Task.TaskOperation.GetTaskOperation import GetTaskOperation
-
 from Master.Task.TaskOperation.UploadTaskOperation import UploadTaskOperation
-
+from Master.Task import Const as C
 
 class TaskManager(UploadTaskOperation, GetTaskOperation):
     def __init__(self):
@@ -23,7 +22,11 @@ class TaskManager(UploadTaskOperation, GetTaskOperation):
         return response
 
     def upload_task(self, request_obj):
-        pass
+        if request_obj[C.TASK_ID] == 1:
+            #淘宝分类获取
+            response = self._upload_taobao_task(request_obj)
+
+        return response
 
 
 if __name__ == '__main__':

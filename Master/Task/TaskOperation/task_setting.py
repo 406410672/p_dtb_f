@@ -10,8 +10,8 @@
 
 
 
-
-task = ['get_taobao_task']
+from Master.Task import Const as C
+get_task = ['get_taobao_task']
 
 
 
@@ -24,6 +24,7 @@ task_parse_rule = {'1' : [{
       "content" : {"category_name":'../ul/li/div/*[@class="category-name"]/text()',
                    "category_url":'../ul/li/div/*[@class="category-name"]/@href'}}]
                   }
+
 #任务ID对应存储规则
 task_storage_rule = {'1' : {
                              "handler" : "master",

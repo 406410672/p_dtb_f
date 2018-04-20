@@ -8,3 +8,12 @@ INSERT_TIME = 'insert_time'
 CRAWL_TIME = 'crawl_time'
 
 TASK_ID = 'task_id'
+ITEMS = 'items'
+
+
+## 存储规则键
+
+STORAGE_HANDLER = 'handler'
+STORAGE_TARGET = 'target'
+STORAGE_DB = 'db'
+STORAGE_TABLE = 'table'

@@ -8,37 +8,19 @@
 # @Describe: Desc
 # @Issues  : Issues
 
-import random
-import datetime
-from pymongo import MongoClient
-from pymongo import ASCENDING,DESCENDING
-from BaseModule.Configloader import Configloader
+from Master.Task.TaskOperation.BaseOperation import *
 
-import json
-from Master.Task import Const as C
-from Socket import SocketProtocol as pc
-from Master.Task.TaskOperation import task_setting as ts
-try:
-    # Python 3.x
-    from urllib.parse import quote_plus
-except ImportError:
-    # Python 2.x
-    from urllib import quote_plus
-
-
-class GetTaskOperation(object):
+class GetTaskOperation(BaseOperation):
     def __init__(self):
-        self.configloader = Configloader()
-        uri = "mongodb://%s:%s@%s" % (quote_plus(self.configloader.mongodb_user), quote_plus(self.configloader.mongodb_password), self.configloader.mongodb_host)
-        self.mgdb = MongoClient(uri)
+        BaseOperation.__init__(self)
 
     def _get_task_operation(self, request_obj):
-        attr = getattr(self, random.choice(ts.task), None)
+        attr = getattr(self, random.choice(ts.get_task), None)
         response = attr(request_obj)
         return response
 
     def get_taobao_task(self, request_obj):
-        taobao = self.mgdb.taobao
+        taobao = self.mongodb.taobao
         taobao_seed = taobao.taobao_seed
         if taobao_seed.count() == 0:
             taobao_seed.create_index([(C.INSERT_TIME,DESCENDING)])
