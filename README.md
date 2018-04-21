@@ -70,6 +70,7 @@
 > * 当爬虫端启动后每10分钟向Matser请求任务，一旦获取到任务则不断进行请求申请。
 > * 假如获取不到任务则暂停，5分钟后再进行请求申请任务。
 > * 每次只会返回同一个网站同一个级别的任务
+> * 解析规则与存储规则统一使用task_id去Master.Task.TaskOperation.task_setting 获取
 ##### 请求格式:
 ```python
 {
@@ -82,14 +83,11 @@
 ##### 返回格式:
 ```python
 {
-    "type": "GET",
     "task_name": "淘宝商品信息获取",
     "task_id" : '',   #任务id
-    "domain" : "www.taobao.com",
     'task_items' ： [获取到的任务格式],  # 数据类型，如果没有任务，则数组大小为0
-    'task_nums' : 100, #返回的任务个数   如果没有任务，则为0
-    "storage_rule":[存储规则],
-    "parse_rule" : [解析规则]
+    'task_nums' : 100 #返回的任务个数   如果没有任务，则为0
+
 }
 ```
 ###### [获取到的任务格式]：
@@ -98,8 +96,10 @@
     "url" : "",
 }
 ```
+
 ###### [解析规则]
 
+**解析规则与存储规则统一使用task_id去Master.Task.TaskOperation.task_setting 获取**
  1. 数据类型：数组
  2. type: 解析类型（目前只用处理 [xpath]与[module]类型）
  3. priority:优先级，数字越小则优先级越高。根据优先级顺序进行解析。
@@ -158,10 +158,8 @@ or
     'request_type' : 'upload_tasks',
     'client_id'：'',
     'request_time'：    #时间戳的形式,
-    'task_name' : ''  , #任务的名字需要上传
     'task_id' :'' ,     #任务id
-    'url' : '',         #任务的url需要上传
-    'items' :[获取到的数据] #字典形式
+    'items' :[获取到的数据] #字典或者数组形式
 }
 ```
 ##### 返回格式:
@@ -186,43 +184,9 @@ or
 ##### 任务存储数据结构
 ```python
 {
-    "type": "GET",
     "task_name": "淘宝商品分类获取",
-    "domain": "www.taobao.com",
-    "url" : "",
-    "headers": "",
-    "parse_rule": [
-        {
-            "type": "xpath",
-            "priority": 100,
-            "pattern": "./li/div[@class=\"category-items\"]/a[@class=\"category-name\"]",
-            "content": {
-                "category_name": "./text()",
-                "category_url": "./@href"
-            }
-        },
-        {
-            "type": "json",
-            "priority": 200,
-            "parttern": "items.price"
-        },
-        {
-            "type": "regular",
-            "priority": 300,
-            "parttern": "g_page_config = ({.*})"
-        },
-        {
-            "type": "module",
-            "module_name": "taobao_category_parse",
-            "priority": 1
-        }
-    ],
-    "storage_rule": {
-        "handler" : "crawler",
-        "target" : "mongodb",
-        "db" : "taobao",
-        "table":"category_info"
-    }
+    "task_id" : "1"
+    "items" : [{'url':''}]
 }
 ```
 

@@ -67,7 +67,7 @@ class CrawlerManager(BaseCrawler, Thread):
 
     def run(self):
         BaseCrawler.actionCrawler(self)
-        self.process_crawl()
+        self.process_crawl_scheduler()
 
 
 if __name__ == '__main__':

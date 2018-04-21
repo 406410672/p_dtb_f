@@ -16,7 +16,7 @@ from Socket.SocketProtocol import *
 class TaskManager(TaskDownloader, TaskUploader):
     def __init__(self):
         TaskDownloader.__init__(self)
-        TaskUploader.__init__()
+        TaskUploader.__init__(self)
 
     def processing_task(self, task_info):
         task_id = task_info['task_id']
@@ -35,5 +35,5 @@ class TaskManager(TaskDownloader, TaskUploader):
         parse_rule = task_info[PARSE_RULE]
         storage_rule = task_info[STORAGE_RULE]
         if int(task_id) == 1:
-            self._upload_task_1(data, task_info, crawler)
-
+            response = self._upload_task_1(data, task_info, crawler)
+            return response

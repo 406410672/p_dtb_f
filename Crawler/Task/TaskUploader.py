@@ -12,6 +12,8 @@ from BaseModule.DateProcessing import *
 from BaseModule import HTTPRequest as http
 from BaseModule.HTMLParser import HTMLParser as hp
 from Master.Task import Const as C
+from Socket import SocketProtocol as pc
+import json
 from Socket.SocketProtocol import *
 
 class TaskUploader(object):
@@ -22,6 +24,20 @@ class TaskUploader(object):
     def _upload_task_1(self, data, task_info, crawler):
         client_id = crawler.clientId
         domain = task_info['domain']
+        task_name = task_info['task_name']
+        url = task_info['url']
         parse_rule = task_info[PARSE_RULE]
         storage_rule = task_info[STORAGE_RULE]
+        time = datetime_to_timestamp(get_datestr())
 
+        parm =  {
+            pc.MSG_TYPE : pc.UPLOAD_TASKS,
+            'task_name' : task_name,
+            'items' : data,
+            'task_id' : 1,
+            'url' : url,
+            'request_time' : time,
+            pc.CLIENT_ID : client_id
+        }
+        response = crawler.socketClient.send(json.dumps(parm))
+        return response
