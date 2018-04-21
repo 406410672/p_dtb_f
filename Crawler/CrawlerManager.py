@@ -26,12 +26,17 @@ class CrawlerManager(BaseCrawler, Thread):
 
     def crawl(self):
         task = self.application_task()
-        if task is None:
-            pass
+        task_num = task['task_nums']
+        items = task['items']
+        if int(task_num) == 0 or items is None or len(items) == 0:
+            self.logger.debug('没有需要处理的任务')
         else:
             data = self.task_manager.processing_task(task)
-            response = self.task_manager.upload_data(data, task, self)
-
+            if data is None:
+                self.logger.error('get date error for task:{}'.format(task))
+            else:
+                response = self.task_manager.upload_data(data, task, self)
+                self.logger.debug('upload result :{}'.format(response))
 
     def application_task(self):
         time = datetime_to_timestamp(get_datestr())

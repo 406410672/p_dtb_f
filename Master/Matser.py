@@ -46,12 +46,13 @@ class Master(object):
         :param message:
         :return:
         '''
-        self.logger.error(message)
         request_obj = json.loads(message)
         response = dict()
         response[pc.SERVER_STATUS] = self.server_status
+        request_type = request_obj[pc.MSG_TYPE]
+        self.logger.debug('recive a request type:{}  message len:{}'.format(request_type,len(message)))
         # 注册
-        if request_obj[pc.MSG_TYPE] == pc.REGISTER:
+        if request_type == pc.REGISTER:
             clientid = self.get_clientid()
             clientName = request_obj[pc.CLIENT_NAME]
             client = {
@@ -77,21 +78,23 @@ class Master(object):
             return json.dumps(response)
 
         # 注销
-        if request_obj[pc.MSG_TYPE] == pc.UNREGISTER:
+        if request_type == pc.UNREGISTER:
             del self.clients[clientid]
             return json.dumps(response)
         # 心跳
-        elif request_obj[pc.MSG_TYPE] == pc.HEARTBEAT:
-            print(self.clients)
+        elif request_type == pc.HEARTBEAT:
             self.clients[clientid]['time'] = time.time()
             return json.dumps(response)
         # 申请任务
-        elif request_obj[pc.MSG_TYPE] == pc.APPLICATION_TASKS:
+        elif request_type == pc.APPLICATION_TASKS:
             app_tasks_response = self.get_task_opration(request_obj=request_obj)
-            response.update(app_tasks_response)
+            if app_tasks_response is None:
+                pass
+            else:
+                response.update(app_tasks_response)
             return json.dumps(response)
         # 上传任务
-        elif request_obj[pc.MSG_TYPE] == pc.UPLOAD_TASKS:
+        elif request_type == pc.UPLOAD_TASKS:
             upload_task_response = self.upload_task_operation(request_obj=request_obj)
             response.update(upload_task_response)
             return json.dumps(response)

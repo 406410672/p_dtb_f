@@ -19,6 +19,7 @@ from Master.Task import Const as C
 from Socket import SocketProtocol as pc
 from Master.Task.TaskOperation import task_setting as ts
 from BaseModule.DateProcessing import *
+from BaseModule.HTLogger import HTLogger
 try:
     # Python 3.x
     from urllib.parse import quote_plus
@@ -33,3 +34,4 @@ class BaseOperation(object):
             quote_plus(self.configloader.mongodb_user), quote_plus(self.configloader.mongodb_password),
             self.configloader.mongodb_host)
         self.mongodb = MongoClient(uri)
+        self.logger = HTLogger('master_task_operation.log')

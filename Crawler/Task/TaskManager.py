@@ -20,20 +20,20 @@ class TaskManager(TaskDownloader, TaskUploader):
 
     def processing_task(self, task_info):
         task_id = task_info['task_id']
-        domain = task_info['domain']
-        parse_rule = task_info[PARSE_RULE]
-        storage_rule = task_info[STORAGE_RULE]
         data = None
-        if int(task_id) == 1:
+        if task_id is None:
+            return None
+        if task_id == '1':
             data = self._download_task_1(task_info)
-
+        elif task_id == '2':
+            data = self._download_task_2(task_info)
         return data
 
     def upload_data(self, data, task_info, crawler):
         task_id = task_info['task_id']
-        domain = task_info['domain']
-        parse_rule = task_info[PARSE_RULE]
-        storage_rule = task_info[STORAGE_RULE]
-        if int(task_id) == 1:
+        if task_id == '1':
             response = self._upload_task_1(data, task_info, crawler)
+            return response
+        elif task_id == '2':
+            response = self._upload_task_2(data, task_info, crawler)
             return response

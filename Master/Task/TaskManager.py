@@ -22,9 +22,12 @@ class TaskManager(UploadTaskOperation, GetTaskOperation):
         return response
 
     def upload_task(self, request_obj):
-        if request_obj[C.TASK_ID] == 1:
+        if request_obj[C.TASK_ID] == '1':
             #淘宝分类获取
-            response = self._upload_taobao_task(request_obj)
+            response = self._upload_task_1(request_obj)
+        elif request_obj[C.TASK_ID] == '2':
+            #淘宝分类获取
+            response = self._upload_task_2(request_obj)
 
         return response
 
