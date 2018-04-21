@@ -185,8 +185,8 @@ or
 ```python
 {
     "task_name": "淘宝商品分类获取",
-    "task_id" : "1"
-    "items" : [{'url':''}]
+    "task_id" : "1",
+    'url':''
 }
 ```
 
