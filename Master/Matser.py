@@ -74,7 +74,7 @@ class Master(object):
             return json.dumps(response)
         elif self.clients.get(clientid).get('status') == pc.ERROR_CONNECTION_LOST:
             response[pc.ACTION_REQUIRED] = pc.RESUME_REQUIRED
-            return response
+            return json.dumps(response)
 
         # 注销
         if request_obj[pc.MSG_TYPE] == pc.UNREGISTER:

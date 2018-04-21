@@ -9,6 +9,14 @@
 # @Issues  : Issues
 
 
+#任务描述
+'''
+task_id : 1
+淘宝商品分类获取_数码家电 一级分类
+'''
+
+
+
 
 from Master.Task import Const as C
 get_task = ['get_taobao_task']

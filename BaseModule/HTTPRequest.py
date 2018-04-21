@@ -7,24 +7,13 @@
 # @Software: PyCharm Community Edition
 # @Describe: Desc
 # @Issues  : Issues
-try:
-    import platform
-
-    if platform.python_version()[0] == 2:
-        import sys
-
-        reload(sys)
-        sys.setdefaultencoding('utf8')
-except Exception as error:
-    print('setdefaultencoding error:{}'.format(error))
-
 
 import sys
 import random
 import requests
 import urllib
 import time
-from HTLogger import HTLogger
+from BaseModule.HTLogger import HTLogger
 
 logger = HTLogger('http_request.log')
 

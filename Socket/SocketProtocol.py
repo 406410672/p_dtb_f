@@ -48,6 +48,8 @@ STORAGE_RULE = 'storage_rule'
 ## 请求时间
 REQUEST_TIME = 'request_time'
 
+
+
 # 暂时不适用
 # unregister client with id assigned by master
 UNREGISTER 	= 'UNREGISTER'
@@ -59,3 +61,4 @@ PAUSE_REQUIRED	= 'PAUSE_REQUIRED'
 RESUME_REQUIRED	= 'RESUME_REQUIRED'
 # server require shutdown
 SHUTDOWN_REQUIRED	= 'SHUTDOWN_REQUIRED'
+RESUMED = 'resumed'
