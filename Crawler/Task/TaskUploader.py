@@ -20,7 +20,6 @@ class TaskUploader(object):
     def __init__(self):
         pass
 
-
     def _upload_task_1(self, data, task_info, crawler):
         client_id = crawler.clientId
         task_name = task_info['task_name']
@@ -55,3 +54,6 @@ class TaskUploader(object):
         print('上传的数据{}'.format(json.dumps(parm)))
         response = crawler.socketClient.send(json.dumps(parm))
         return response
+
+    def _upload_task_3(self, data, task_info, crawler):
+        pass

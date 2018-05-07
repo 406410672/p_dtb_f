@@ -103,9 +103,12 @@ class UploadTaskOperation(BaseOperation):
         for item_dict in items:
             insert_data = dict()
             nid = item_dict['nid']
+            data = insert_data['data']
             insert_data['_id'] = item_dict['nid']
             insert_data['insert_time'] = time.time()
+            insert_data.update(data)
             insert_list.append(insert_data)
+
 
         taobao_item_detail.insert_many(insert_list, ordered=False)
 

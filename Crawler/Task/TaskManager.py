@@ -27,6 +27,8 @@ class TaskManager(TaskDownloader, TaskUploader):
             data = self._download_task_1(task_info)
         elif task_id == '2':
             data = self._download_task_2(task_info)
+        elif task_id == '3':
+            data = self._download_task_3(task_info)
         return data
 
     def upload_data(self, data, task_info, crawler):
@@ -36,4 +38,7 @@ class TaskManager(TaskDownloader, TaskUploader):
             return response
         elif task_id == '2':
             response = self._upload_task_2(data, task_info, crawler)
+            return response
+        elif task_id == '3':
+            response = self._upload_task_3(data, task_info, crawler)
             return response

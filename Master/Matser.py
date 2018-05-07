@@ -20,13 +20,14 @@ from Socket import SocketProtocol as pc
 from BaseModule import DateProcessing as dp
 from Master.Task.TaskManager import TaskManager
 CLIENT_LOST_TIME = 60 * 10
-class Master(object):
+class Master(HTLogger):
     def __init__(self):
+        HTLogger.__init__(self, 'master.log')
         self.configLoader = Configloader()
         self.socketServer = HTSocketServer(callback=self.on_message,
                                            ip=self.configLoader.master_host,
                                            port=self.configLoader.master_port)
-        self.logger = HTLogger('master.log')
+        # self.logger = HTLogger('master.log')
         self.task_manager = TaskManager()
         self.clients = dict()
         self.server_status = pc.SERVER_RUNNING

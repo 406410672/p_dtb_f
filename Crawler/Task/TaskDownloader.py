@@ -15,10 +15,12 @@ from BaseModule.HTLogger import HTLogger
 from Master.Task import Const as C
 from Socket.SocketProtocol import *
 
-class TaskDownloader(object):
+from gevent import monkey; monkey.patch_socket()
+import gevent
+class TaskDownloader(HTLogger):
     def __init__(self):
-
-        self.logger = HTLogger('crawler_task_downloader.log')
+        HTLogger.__init__(self, 'crawler_task_downloader.log')
+        # self.logger = HTLogger('crawler_task_downloader.log')
 
     def _download_task_1(self, task_info):
         self.logger.debug('task1 downloading ')
@@ -58,6 +60,34 @@ class TaskDownloader(object):
 
             data_list.append(data)
         return data_list
+
+    def _download_task_3(self, task_info):
+        '''
+        淘宝详情下载
+        :param task_info:
+        :return:
+        '''
+        items = task_info['items']
+        task_id = task_info['task_id']
+        crawl_obj = list()
+        data_list = list()
+        #遍历处理每个任务
+        #并对每个任务进行封装然后返回 预备上传
+        for item in items:
+            url = item['detail_url']
+            category_name = item['nid']
+            compate_url = 'https:' + url
+            gevent.spawn(http.get(compate_url))
+            # item_response = http.get(url='https:' + url)
+
+            parser_data = hp.parser(content=item_response.content, task_info=task_info)
+            data = [{'data': parser_data,
+                     'category_name': category_name,
+                     'url': url}]
+
+            data_list.append(data)
+        return data_list
+
 
 
 if __name__ == '__main__':

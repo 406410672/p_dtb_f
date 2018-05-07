@@ -21,15 +21,17 @@ from Socket.SocketClient import HTSocketClient
 from BaseModule.Configloader import Configloader
 from BaseModule.HTLogger import HTLogger
 from BaseModule.DateProcessing import *
-class BaseCrawler():
+
+class BaseCrawler(HTLogger):
     def __init__(self, name):
+        HTLogger.__init__(self, name)
         self.configLoader = Configloader()
         self.socketClient = HTSocketClient(ip=self.configLoader.master_host,
                                            port=self.configLoader.master_port)
         self.server_status = None
         self.clientId = None
         self.clientname = name
-        self.logger = HTLogger(name)
+        # self.logger = HTLogger(name)
 
         def crawlerSignal():
             signal.signal(signal.SIGTERM, self.shutDownCrawler)
@@ -105,6 +107,13 @@ class BaseCrawler():
                 self.logger.debug(response)
 
 
+# if __name__ == '__main__':
+#     basecrawler = BaseCrawler('测试5')
+#     basecrawler.actionCrawler()
 if __name__ == '__main__':
-    basecrawler = BaseCrawler('测试5')
-    basecrawler.actionCrawler()
+    am = BaseCrawler('d')
+    from multiprocessing import Process
+
+    process = Process(target=am.actionCrawler)
+    process.start()
+    process.join()

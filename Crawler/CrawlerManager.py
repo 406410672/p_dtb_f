@@ -16,11 +16,14 @@ import time
 from Crawler.BaseCrawler import *
 from threading import Thread
 from Crawler.Task.TaskManager import TaskManager as tk
+from multiprocessing import Process
+from gevent.monkey import patch_socket
+import gevent
 
-class CrawlerManager(BaseCrawler, Thread):
+class CrawlerManager(BaseCrawler):
     def __init__(self):
         BaseCrawler.__init__(self, 'crawler.log')
-        Thread.__init__(self)
+        # Thread.__init__(self)
         self.task_manager = tk()
         self.threads = list()
 
@@ -77,7 +80,12 @@ class CrawlerManager(BaseCrawler, Thread):
 
 if __name__ == '__main__':
     am = CrawlerManager()
-
-    am.setDaemon(True)
-    am.start()
-    am.join()
+    process = Process(target=am.run)
+    process.start()
+    process.join()
+    # from pickle import Pickler
+    # file = {'log_to_stderr': False, 'authkey': b'\x12\xe5\xff4\x1f\n\xc0\x1c\xf1\xb7\xe2\x16\x83\xbd\xb8\x86\xc0ZM\xff\xba\xdaT1)\xf0\xed\x9d\xa1\xb7\x96\xad', 'name': 'Process-1', 'sys_path': ['C:\\Users\\18316\\Desktop\\p_dtb_f\\Crawler', 'C:\\Users\\18316\\Desktop\\p_dtb_f', 'C:\\Users\\18316\\Anaconda3\\python36.zip', 'C:\\Users\\18316\\Anaconda3\\DLLs', 'C:\\Users\\18316\\Anaconda3\\lib', 'C:\\Users\\18316\\Anaconda3', 'C:\\Users\\18316\\Anaconda3\\lib\\site-packages', 'C:\\Users\\18316\\Anaconda3\\lib\\site-packages\\Babel-2.5.0-py3.6.egg', 'C:\\Users\\18316\\Anaconda3\\lib\\site-packages\\win32', 'C:\\Users\\18316\\Anaconda3\\lib\\site-packages\\win32\\lib', 'C:\\Users\\18316\\Anaconda3\\lib\\site-packages\\Pythonwin', 'C:\\Users\\18316\\Desktop\\p_dtb_f\\Crawler\\..'], 'sys_argv': ['C:/Users/18316/Desktop/p_dtb_f/Crawler/CrawlerManager.py'], 'orig_dir': 'C:\\Users\\18316\\Desktop\\p_dtb_f\\Crawler', 'dir': 'C:\\Users\\18316\\Desktop\\p_dtb_f\\Crawler', 'start_method': 'spawn', 'init_main_from_path': 'C:\\Users\\18316\\Desktop\\p_dtb_f\\Crawler\\CrawlerManager.py'}
+    # Pickler(file)
+    # am.setDaemon(True)
+    # am.start()
+    # am.join()

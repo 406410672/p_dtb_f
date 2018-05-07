@@ -68,8 +68,7 @@ task_id : 3
     'request_time'：    #时间戳的形式,
     'task_id' :'' ,     #任务id
     'items' :[{'nid': '',
-                'category_name',''
-                'data':[{},{}]}]
+                'data':{}]
 
     }
 '''
