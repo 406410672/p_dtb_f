@@ -72,7 +72,6 @@ class GetTaskOperation(BaseOperation):
             sort=[(C.INSERT_TIME, DESCENDING)],
             limit=10
         )
-
         num_task = 0
         urls = []
         items = []
@@ -101,11 +100,53 @@ class GetTaskOperation(BaseOperation):
             response['task_id'] = ''
             return response
 
+    def _get_task_3(self, request_obj):
+        '''
+        淘宝商品详情爬取
+        :param request_obj:
+        :return:
+        '''
+        taobao = self.mongodb.taobao6
+        taobao_item = taobao.taobao_item
 
+        records = taobao_item.find(
+            {'$or': [{C.CRAWL_STATUS: C.CRAWL_NEW}, {C.CRAWL_STATUS: None}, {C.CRAWL_STATUS: {'$exists': False}}]}
+            ,
+            sort=[(C.INSERT_TIME, DESCENDING)],
+            limit=50
+        )
+        num_task = 0
+        _ids = []
+        items = []
+        response = dict()
+        print(records)
+        for record in records:
+            num_task += 1
+            url = record['detail_url']
+            _id = record['_id']
+            nid = record['nid']
+            _ids.append({'_id': _id})
+            item = {'url': url, 'nid': nid}
+            items.append(item)
+        if len(items) > 0:
+            response = {
+                'task_name': '淘宝商品详情爬取',
+                'task_id': '3',
+                'items': items,
+                'task_nums': str(num_task),
+            }
+            taobao_item.update_many({'$or': _ids}, {'$set': {C.CRAWL_STATUS: C.CRAWL_DOWNING}})
+            return response
+        else:
+            response['task_nums'] = 0
+            response['items'] = []
+            response['task_name'] = ''
+            response['task_id'] = ''
+            return response
 
 
 if __name__ == '__main__':
     to = GetTaskOperation()
-    response = to._get_task_1('r')
+    response = to._get_task_3('r')
     print(response)
     # print(json.dumps(response))

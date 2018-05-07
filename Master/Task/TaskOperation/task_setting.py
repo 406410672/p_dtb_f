@@ -52,12 +52,34 @@ task_id : 2
 
     }
 '''
+'''
+task_id : 3
+淘宝商品详情获取
+获取的任务格式 主要数据
+{
+   "task_name": "淘宝商品详情获取",
+    "task_id" : '3',  
+    'items' ： [{'url':'','category_name':'[]'}],
+    'task_nums' : 1 #返回的任务个数   如果没有任务，则为0
+}
+上传的格式
+{
+    'client_id'：'',
+    'request_time'：    #时间戳的形式,
+    'task_id' :'' ,     #任务id
+    'items' :[{'nid': '',
+                'category_name',''
+                'data':[{},{}]}]
+
+    }
+'''
 
 
 
 
 from Master.Task import Const as C
-get_task = ['_get_task_1','_get_task_2']
+# get_task = ['_get_task_1','_get_task_2']
+get_task = ['_get_task_3']
 
 
 

@@ -88,49 +88,28 @@ class UploadTaskOperation(BaseOperation):
                     insert_obj['task_id'] = next_id
                     insert_obj['task_name'] = task_name
                     collection.insert(insert_obj)
-        return
-        try:
-            task_id = str(request_obj[C.TASK_ID])
-            response = dict()
-            items = request_obj[C.ITEMS]
-
-            next_id = '3'
-            task_name = '淘宝商品信息_数码家电'
-
-            storage_rule = ts.task_storage_rule[str(task_id)]
-            db = storage_rule[C.STORAGE_DB]
-            table = storage_rule[C.STORAGE_TABLE]
-            target = storage_rule[C.STORAGE_TARGET]
-
-            if target == 'mongodb':
-                db = self.mongodb[db]
-                collection = db[table]
-                if collection.count() == 0:
-                    collection.create_index([("insert_time", DESCENDING)])
-
-                for item_dict in items:
-                    last_url = item_dict['url']
-                    category_name = item_dict['category_name']
-                    time =  datetime_to_timestamp(get_current_datestr())
-                    datas = item_dict['data']
-                    for data in datas:
-                        insert_obj = dict()
-                        insert_obj[C.INSERT_TIME] = datetime_to_timestamp(get_current_datestr())
-                        insert_obj['last_url'] = last_url
-                        insert_obj['task_id'] = next_id
-                        insert_obj['task_name'] = task_name
-                        collection.insert(insert_obj)
-
-
-        except KeyError as error:
-            response[pc.ERROR] = pc.ERR_UPLOAD_TASK
-            response[pc.ERROR_INFO] = 'upload key error'
-            return response
-        except Exception as error:
-            response[pc.ERROR] = pc.ERR_UPLOAD_TASK
-            response[pc.ERROR_INFO] = 'upload error,other error'
-            return response
+        # return
         return response
+
+    def _upload_task_3(self, request_obj):
+        task_id = str(request_obj[C.TASK_ID])
+        response = dict()
+        items = request_obj[C.ITEMS]
+        taobao = self.mongodb.taobao6
+        taobao_item_detail = taobao.taobao_item_detail
+        if taobao_item_detail.count() == 0:
+            taobao_item_detail.create_index([(C.INSERT_TIME,DESCENDING)])
+        insert_list = list()
+        for item_dict in items:
+            insert_data = dict()
+            nid = item_dict['nid']
+            insert_data['_id'] = item_dict['nid']
+            insert_data['insert_time'] = time.time()
+            insert_list.append(insert_data)
+
+        taobao_item_detail.insert_many(insert_list, ordered=False)
+
+
 
 
 if __name__ == '__main__':

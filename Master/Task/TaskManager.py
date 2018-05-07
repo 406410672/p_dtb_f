@@ -28,6 +28,9 @@ class TaskManager(UploadTaskOperation, GetTaskOperation):
         elif request_obj[C.TASK_ID] == '2':
             #淘宝分类获取
             response = self._upload_task_2(request_obj)
+        elif request_obj[C.TASK_ID] == '3':
+            #淘宝商品详情获取
+            response = self._upload_task_3(request_obj)
 
         return response
 
