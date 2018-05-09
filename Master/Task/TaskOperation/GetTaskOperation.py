@@ -110,8 +110,10 @@ class GetTaskOperation(BaseOperation):
         taobao_item = taobao.taobao_item
 
         records = taobao_item.find(
-            {'$or': [{C.CRAWL_STATUS: C.CRAWL_NEW}, {C.CRAWL_STATUS: None}, {C.CRAWL_STATUS: {'$exists': False}}]}
-            ,
+            {'$and': [
+                {'$or': [{C.CRAWL_STATUS: C.CRAWL_NEW}, {C.CRAWL_STATUS: None}, {C.CRAWL_STATUS: {'$exists': False}}]},
+                {'detail_url': {'$regex': 'taobao.com'}}
+            ]},
             sort=[(C.INSERT_TIME, DESCENDING)],
             limit=50
         )
