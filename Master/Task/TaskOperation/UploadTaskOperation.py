@@ -92,6 +92,11 @@ class UploadTaskOperation(BaseOperation):
         return response
 
     def _upload_task_3(self, request_obj):
+        '''
+        淘宝商品详情
+        :param request_obj:
+        :return:
+        '''
         task_id = str(request_obj[C.TASK_ID])
         response = dict()
         items = request_obj[C.ITEMS]
@@ -108,8 +113,30 @@ class UploadTaskOperation(BaseOperation):
             insert_data['insert_time'] = time.time()
             insert_data.update(data)
             insert_list.append(insert_data)
+        taobao_item_detail.insert_many(insert_list, ordered=False)
 
-
+    def _upload_task_4(self, request_obj):
+        '''
+        淘宝商品详情子数据商品分类及销售信息获取
+        :param request_obj:
+        :return:
+        '''
+        task_id = str(request_obj[C.TASK_ID])
+        response = dict()
+        items = request_obj[C.ITEMS]
+        taobao = self.mongodb.taobao6
+        taobao_item_detail = taobao.taobao_item_detail
+        if taobao_item_detail.count() == 0:
+            taobao_item_detail.create_index([(C.INSERT_TIME,DESCENDING)])
+        insert_list = list()
+        for item_dict in items:
+            insert_data = dict()
+            nid = item_dict['nid']
+            data = insert_data['data']
+            insert_data['_id'] = item_dict['nid']
+            insert_data['insert_time'] = time.time()
+            insert_data.update(data)
+            insert_list.append(insert_data)
         taobao_item_detail.insert_many(insert_list, ordered=False)
 
 

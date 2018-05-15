@@ -18,9 +18,12 @@ def config_call_back(config_list, task_info, nid, url, fn):
     result = result.decode(encoding='gb18030')
 
     parser_data = hp.parser(content=result, task_info=task_info)
-    data = {'data': parser_data,
-            'nid': nid,
-            'url': url}
+    data = {
+        'data': parser_data,
+        'nid': nid,
+        '_id': nid,
+        'url': url
+    }
     config_list.append(data)
 
 
@@ -61,20 +64,20 @@ def get_other_info_task(config, session):
             descUrl = re.findall(u"(//.*)'\s", descUrl)[0]
             descUrl = 'http:' + descUrl
 
-            task = asyncio.ensure_future(session.get_url(url=descUrl, headers=c_headers))
+            task = asyncio.ensure_future(session.get_url(url=descUrl, headers=headers))
             task.add_done_callback(functools.partial(call_back, 'desc_content'))
             task_list.append(task)
         except Exception as error:
             print('getdescUrl error:{}'.format(error))
 
-    if sibUrl == '':
-        pass
-    else:
-        # print(sibUrl)
-        sibUrl = 'https:' + sibUrl
-        task = asyncio.ensure_future(session.get_url(url=sibUrl, headers=headers))
-        task.add_done_callback(functools.partial(call_back, 'sib_content'))
-        task_list.append(task)
+    # if sibUrl == '':
+    #     pass
+    # else:
+    #     # print(sibUrl)
+    #     sibUrl = 'https:' + sibUrl
+    #     task = asyncio.ensure_future(session.get_url(url=sibUrl, headers=headers))
+    #     task.add_done_callback(functools.partial(call_back, 'sib_content'))
+    #     task_list.append(task)
 
     if counterApi == '':
         pass

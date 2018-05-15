@@ -31,10 +31,15 @@ class TaskManager(UploadTaskOperation, GetTaskOperation):
         elif request_obj[C.TASK_ID] == '3':
             #淘宝商品详情获取
             response = self._upload_task_3(request_obj)
+        elif request_obj[C.TASK_ID] == '4':
+            #淘宝商品详情获取
+            response = self._upload_task_4(request_obj)
 
         return response
 
 
 if __name__ == '__main__':
     tm = TaskManager()
-    print(tm.get_task({'',''}))
+    # print(
+    import json
+    print(json.dumps(tm.get_task({'':''})))

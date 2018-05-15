@@ -100,13 +100,11 @@ class TaskDownloader(HTLogger):
         #继续根据config下载
         for config in config_list:
             print(config)
-            # Task_3_Handler.get_other_info(config, session=s)
-            # task = asyncio.ensure_future(Task_3_Handler.get_other_info(config, session=s,loop=loop))
-            # get_other_tasks.append(task)
             tasks = Task_3_Handler.get_other_info_task(config, s)
             get_other_tasks.extend(tasks)
         loop.run_until_complete(asyncio.wait(get_other_tasks))
-        loop.stop()
+        # loop.stop()
+
         s.session.close()
         return config_list
 
@@ -115,66 +113,7 @@ class TaskDownloader(HTLogger):
 if __name__ == '__main__':
     now = lambda  : time.time()
     td = TaskDownloader()
-    parm = {'task_id': '3',
-            'items': [
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'},
-                      {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',
-                       'nid': 'Iphone'}]}
+
     parm = {'task_id': '3',
             'items': [
                 {'detail_url': '//item.taobao.com/item.htm?id=566332885181&ns=1&abbucket=14#detail',

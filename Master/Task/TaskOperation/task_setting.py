@@ -59,7 +59,7 @@ task_id : 3
 {
    "task_name": "淘宝商品详情获取",
     "task_id" : '3',  
-    'items' ： [{'url':'','category_name':'[]'}],
+    'items' ： [{'url':'' *}],
     'task_nums' : 1 #返回的任务个数   如果没有任务，则为0
 }
 上传的格式
@@ -68,6 +68,29 @@ task_id : 3
     'request_time'：    #时间戳的形式,
     'task_id' :'' ,     #任务id
     'items' :[{'nid': '',
+                '_id':'',
+                'data':{}]
+
+    }
+'''
+
+'''
+task_id : 4
+淘宝商品详情子数据商品分类及销售信息获取（反扒）
+获取的任务格式 主要数据
+{
+   "task_name": "淘宝商品详情子数据商品分类及销售信息获取",
+    "task_id" : '4',  
+    'items' ： [{'itemurl':'','sibUrl':'' ,'nid':''}],
+    'task_nums' : 1 #返回的任务个数   如果没有任务，则为0
+}
+上传的格式
+{
+    'client_id'：'',
+    'request_time'：    #时间戳的形式,
+    'task_id' :'' ,     #任务id
+    'items' :[{'nid': '',
+                '_id':nid,
                 'data':{}]
 
     }
@@ -78,12 +101,12 @@ task_id : 3
 
 from Master.Task import Const as C
 # get_task = ['_get_task_1','_get_task_2']
-get_task = ['_get_task_3']
+get_task = ['_get_task_3', '_get_task_4']
 
 
 
 
-#任务ID对应解析规则
+#任务ID对应解析规则 (暂时弃用)
 task_parse_rule = {
     '1' : [{
       "type" : "xpath",
@@ -97,7 +120,7 @@ task_parse_rule = {
       "pattern" : 'g_page_config = ({.*})',
       "content" : {}}]}
 
-#任务ID对应存储规则
+#任务ID对应存储规则 (暂时弃用)
 task_storage_rule = {'1' : {
                              "handler" : "master",
                              "target" : "mongodb",

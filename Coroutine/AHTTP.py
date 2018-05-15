@@ -28,7 +28,7 @@ class SessionManager():
 
     async def get_url(self, url, headers=getHeader()):
         session = await self.get_session()
-        print('准备请求的url:{}'.format(url))
+        # print('准备请求的url:{}'.format(url))
         async with session.get(url, headers=headers) as response:
             return (await response.read())
 
