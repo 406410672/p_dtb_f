@@ -63,13 +63,16 @@ def testTaobaoItemdetail_pressure():
 
         taobao = m_tm.mongodb.taobao6
         taobao_item_detail = taobao.taobao_item_detail
-        taobao_item_detail.insert_many(datas, ordered=False)
+        try:
+            taobao_item_detail.insert_many(datas, ordered=False)
+        except Exception as error:
+            print('插入出错{}'.format(error))
         print('insert_date:{}'.format(len(datas)))
         print('cost, ',now() - start)
 
 #     10:30
 if __name__ == '__main__':
-    # testTaobaoItemdetail_pressure()
+    testTaobaoItemdetail_pressure()
     # tm =TaskManager()
     # import time
     # now = lambda :time.time()
@@ -79,7 +82,7 @@ if __name__ == '__main__':
     # print('cost, ',now() - start)
     # testTaobaoItemdetail_pressure()
 
-    from Master.Task.TaskManager import TaskManager as tk
-    m_tm = tk()
-    tasks = m_tm.get_task({'': ''})
-    print(tasks)
+    # from Master.Task.TaskManager import TaskManager as tk
+    # m_tm = tk()
+    # tasks = m_tm.get_task({'': ''})
+    # print(tasks)

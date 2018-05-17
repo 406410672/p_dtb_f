@@ -171,7 +171,7 @@ class GetTaskOperation(BaseOperation):
             import json
             from BaseModule import JsonDecoder
             # print(record)
-            print(json.dumps(record, cls=JsonDecoder.HTJsonEncoder))
+            # print(json.dumps(record, cls=JsonDecoder.HTJsonEncoder))
             url = record['url']
             data = record['data']
 

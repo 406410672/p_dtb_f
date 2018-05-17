@@ -10,6 +10,7 @@
 
 # -*- coding:utf-8 -*-
 import sys,datetime,os
+from BaseModule.HTTPRequest import user_agent
 import time
 # from Const import *
 from selenium import webdriver
@@ -39,9 +40,9 @@ class WebDriverManager:
         else:
             options = webdriver.ChromeOptions()
             options.add_argument(
-                'User-Agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36"')
+                'User-Agent="{}"'.format(user_agent()))
 
-            path = 'E:/chromedriver.exe'
+            path = 'D:/chromedriver.exe'
             driver = webdriver.Chrome(path, chrome_options=options)
             driver_info = {
                 C.LAST_LOGIN_TIME: datetime.datetime.now(),
