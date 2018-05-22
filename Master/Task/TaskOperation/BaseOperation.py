@@ -27,11 +27,16 @@ except ImportError:
     # Python 2.x
     from urllib import quote_plus
 
-class BaseOperation(object):
+class BaseOperation(HTLogger):
     def __init__(self):
+        HTLogger.__init__(self, 'master_task_operation.log')
         self.configloader = Configloader()
         uri = "mongodb://%s:%s@%s" % (
             quote_plus(self.configloader.mongodb_user), quote_plus(self.configloader.mongodb_password),
             self.configloader.mongodb_host)
         self.mongodb = MongoClient(uri)
-        self.logger = HTLogger('master_task_operation.log')
+        # self.logger = HTLogger('master_task_operation.log')
+
+if __name__ == '__main__':
+    op = BaseOperation()
+    op.logger.error('tets')

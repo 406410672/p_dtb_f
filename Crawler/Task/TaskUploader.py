@@ -69,6 +69,6 @@ class TaskUploader(object):
             'request_time': time,
             pc.CLIENT_ID: client_id
         }
-        print('上传的数据{}'.format(json.dumps(parm)))
+        print('上传的数据大小 :{}'.format(len(parm.get('items', list()))))
         response = crawler.socketClient.send(json.dumps(parm))
         return response

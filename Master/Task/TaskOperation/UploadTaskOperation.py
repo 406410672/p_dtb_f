@@ -116,8 +116,9 @@ class UploadTaskOperation(BaseOperation):
             taobao_item_detail_new.insert_many(items, ordered=False)
         except Exception as error:
             self.logger.error('insert set 3 error:{}'.format(error))
+
             response[pc.ERROR] = pc.ERR_UPLOAD_TASK
-            response[pc.ERROR_INFO] = error
+            response[pc.ERROR_INFO] = str(error)
 
         return response
     # def _upload_task_4(self, request_obj):

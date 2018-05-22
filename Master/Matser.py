@@ -51,7 +51,7 @@ class Master(HTLogger):
         response = dict()
         response[pc.SERVER_STATUS] = self.server_status
         request_type = request_obj[pc.MSG_TYPE]
-        self.logger.debug('recive a request type:{}  message len:{}'.format(request_type,len(message)))
+        self.logger.debug('recive a request type:{}  clientId:{}  message len:{}'.format(request_type, request_obj.get(pc.CLIENT_ID, -1), len(message)))
         # 注册
         if request_type == pc.REGISTER:
             clientid = self.get_clientid()
@@ -93,7 +93,7 @@ class Master(HTLogger):
                 pass
             else:
                 response.update(app_tasks_response)
-                self.logger.debug('return num lens :{}'.format(response.get('task_nums', 0)))
+                self.logger.debug('return tasks lens :{}'.format(response.get('task_nums', 0)))
             return json.dumps(response)
         # 上传任务
         elif request_type == pc.UPLOAD_TASKS:
