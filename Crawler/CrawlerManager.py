@@ -55,23 +55,26 @@ class CrawlerManager(BaseCrawler):
             return response_dict
 
     def process_crawl_scheduler(self):
+        # while True:
+        #     for thread in self.threads:
+        #         if thread.isAlive() is not True:
+        #             self.threads.remove(thread)
+        #     self.logger.debug('current threads num:%s'%(len(self.threads)))
+        #     if len(self.threads) >= 5:
+        #         time.sleep(5)
+        #         continue
+        #     try:
+        #         t = Thread(target=self.crawl, name='application tasks')
+        #         t.setDaemon(True)
+        #         self.threads.append(t)
+        #         t.start()
+        #         time.sleep(5)
+        #     except Exception as error:
+        #         self.logger.error('create thread error:{}'.format(error))
+        #         time.sleep(5)
         while True:
-            for thread in self.threads:
-                if thread.isAlive() is not True:
-                    self.threads.remove(thread)
-            self.logger.debug('current threads num:%s'%(len(self.threads)))
-            if len(self.threads) >= 5:
-                time.sleep(5)
-                continue
-            try:
-                t = Thread(target=self.crawl, name='application tasks')
-                t.setDaemon(True)
-                self.threads.append(t)
-                t.start()
-                time.sleep(5)
-            except Exception as error:
-                self.logger.error('create thread error:{}'.format(error))
-                time.sleep(5)
+            self.crawl()
+            time.sleep(5)
 
     def run(self):
         BaseCrawler.actionCrawler(self)

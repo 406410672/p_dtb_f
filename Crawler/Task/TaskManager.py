@@ -43,7 +43,7 @@ class TaskManager(TaskDownloader, TaskUploader):
             response = self._upload_task_3(data, task_info, crawler)
             return response
 
-def testTaobaoItemdetail_pressure():
+def TaobaoItemdetail_pressure():
     from Master.Task.TaskManager import TaskManager as tk
     m_tm = tk()
     import datetime
@@ -72,7 +72,7 @@ def testTaobaoItemdetail_pressure():
 
 #     10:30
 if __name__ == '__main__':
-    testTaobaoItemdetail_pressure()
+    TaobaoItemdetail_pressure()
     # tm =TaskManager()
     # import time
     # now = lambda :time.time()

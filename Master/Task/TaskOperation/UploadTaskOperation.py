@@ -12,12 +12,10 @@
 
 from Master.Task.TaskOperation.BaseOperation import *
 
-
-
+now = lambda: time.time()
 class UploadTaskOperation(BaseOperation):
     def __init__(self):
         BaseOperation.__init__(self)
-
 
     def _upload_task_1(self, request_obj):
         try:
@@ -101,45 +99,49 @@ class UploadTaskOperation(BaseOperation):
         response = dict()
         items = request_obj[C.ITEMS]
         taobao = self.mongodb.taobao6
-        taobao_item_detail = taobao.taobao_item_detail
-        if taobao_item_detail.count() == 0:
-            taobao_item_detail.create_index([(C.INSERT_TIME,DESCENDING)])
-        insert_list = list()
-        for item_dict in items:
-            insert_data = dict()
-            nid = item_dict['nid']
-            data = insert_data['data']
-            insert_data['_id'] = item_dict['nid']
-            insert_data['insert_time'] = time.time()
-            insert_data.update(data)
-            insert_list.append(insert_data)
-        taobao_item_detail.insert_many(insert_list, ordered=False)
+        taobao_item_detail_new = taobao.taobao_item_detail_new
+        if taobao_item_detail_new.count() == 0:
+            taobao_item_detail_new.create_index([(C.INSERT_TIME,DESCENDING)])
+        # insert_list = list()
+        try:
+            for item_dict in items:
+                # insert_data = dict()
+                # nid = item_dict['nid']
+                # data = insert_data['data']
+                # insert_data['_id'] = item_dict['nid']
+                item_dict['insert_time'] = now()
 
-    def _upload_task_4(self, request_obj):
-        '''
-        淘宝商品详情子数据商品分类及销售信息获取
-        :param request_obj:
-        :return:
-        '''
-        task_id = str(request_obj[C.TASK_ID])
-        response = dict()
-        items = request_obj[C.ITEMS]
-        taobao = self.mongodb.taobao6
-        taobao_item_detail = taobao.taobao_item_detail
-        if taobao_item_detail.count() == 0:
-            taobao_item_detail.create_index([(C.INSERT_TIME,DESCENDING)])
-        insert_list = list()
-        for item_dict in items:
-            insert_data = dict()
-            nid = item_dict['nid']
-            data = insert_data['data']
-            insert_data['_id'] = item_dict['nid']
-            insert_data['insert_time'] = time.time()
-            insert_data.update(data)
-            insert_list.append(insert_data)
-        taobao_item_detail.insert_many(insert_list, ordered=False)
+                # insert_data.update(data)
+                # insert_list.append(insert_data)
+            taobao_item_detail_new.insert_many(items, ordered=False)
+        except Exception as error:
+            response[pc.ERROR] = pc.ERR_UPLOAD_TASK
+            response[pc.pc.ERROR_INFO] = error
 
-
+        return response
+    # def _upload_task_4(self, request_obj):
+    #     '''
+    #     淘宝商品详情子数据商品分类及销售信息获取
+    #     :param request_obj:
+    #     :return:
+    #     '''
+    #     task_id = str(request_obj[C.TASK_ID])
+    #     response = dict()
+    #     items = request_obj[C.ITEMS]
+    #     taobao = self.mongodb.taobao6
+    #     taobao_item_detail = taobao.taobao_item_detail
+    #     if taobao_item_detail.count() == 0:
+    #         taobao_item_detail.create_index([(C.INSERT_TIME,DESCENDING)])
+    #     insert_list = list()
+    #     for item_dict in items:
+    #         insert_data = dict()
+    #         nid = item_dict['nid']
+    #         data = insert_data['data']
+    #         insert_data['_id'] = item_dict['nid']
+    #         insert_data['insert_time'] = time.time()
+    #         insert_data.update(data)
+    #         insert_list.append(insert_data)
+    #     taobao_item_detail.insert_many(insert_list, ordered=False)
 
 
 if __name__ == '__main__':

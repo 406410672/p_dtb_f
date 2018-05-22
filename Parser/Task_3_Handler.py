@@ -70,14 +70,14 @@ def get_other_info_task(config, session):
         except Exception as error:
             print('getdescUrl error:{}'.format(error))
 
-    # if sibUrl == '':
-    #     pass
-    # else:
-    #     # print(sibUrl)
-    #     sibUrl = 'https:' + sibUrl
-    #     task = asyncio.ensure_future(session.get_url(url=sibUrl, headers=headers))
-    #     task.add_done_callback(functools.partial(call_back, 'sib_content'))
-    #     task_list.append(task)
+    if sibUrl == '':
+        pass
+    else:
+        # print(sibUrl)
+        sibUrl = 'https:' + sibUrl +  '&callback=onSibRequestSuccess'
+        task = asyncio.ensure_future(session.get_url(url=sibUrl, headers=headers))
+        task.add_done_callback(functools.partial(call_back, 'sib_content'))
+        task_list.append(task)
 
     if counterApi == '':
         pass

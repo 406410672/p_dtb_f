@@ -32,7 +32,7 @@ class TaskManager(UploadTaskOperation, GetTaskOperation):
             #淘宝商品详情获取
             response = self._upload_task_3(request_obj)
         elif request_obj[C.TASK_ID] == '4':
-            #淘宝商品详情获取
+            #淘宝商品详情Sib获取
             response = self._upload_task_4(request_obj)
 
         return response

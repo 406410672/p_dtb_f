@@ -78,7 +78,14 @@ class TaskDownloader(HTLogger):
         #遍历处理每个任务
         #并对每个任务进行封装然后返回 预备上传
 
-        loop = asyncio.get_event_loop()
+        # loop = asyncio.get_event_loop()
+        try:
+            loop = asyncio.get_event_loop()
+        except RuntimeError as error:
+            self.logger.debug('runtime Eror:{}'.format(error))
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+
         config_tasks = list()
         s = SessionManager()
         for item in items:
@@ -99,7 +106,6 @@ class TaskDownloader(HTLogger):
         get_other_tasks = list()
         #继续根据config下载
         for config in config_list:
-            print(config)
             tasks = Task_3_Handler.get_other_info_task(config, s)
             get_other_tasks.extend(tasks)
         loop.run_until_complete(asyncio.wait(get_other_tasks))

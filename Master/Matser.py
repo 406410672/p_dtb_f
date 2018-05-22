@@ -93,6 +93,7 @@ class Master(HTLogger):
                 pass
             else:
                 response.update(app_tasks_response)
+                self.logger.debug('return num lens :{}'.format(response.get('task_nums', 0)))
             return json.dumps(response)
         # 上传任务
         elif request_type == pc.UPLOAD_TASKS:

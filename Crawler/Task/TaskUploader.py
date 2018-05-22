@@ -56,4 +56,19 @@ class TaskUploader(object):
         return response
 
     def _upload_task_3(self, data, task_info, crawler):
-        pass
+        client_id = crawler.clientId
+        task_name = task_info['task_name']
+
+        time = datetime_to_timestamp(get_datestr())
+
+        parm = {
+            pc.MSG_TYPE: pc.UPLOAD_TASKS,
+            'task_name': task_name,
+            'items': data,
+            'task_id': '3',
+            'request_time': time,
+            pc.CLIENT_ID: client_id
+        }
+        print('上传的数据{}'.format(json.dumps(parm)))
+        response = crawler.socketClient.send(json.dumps(parm))
+        return response

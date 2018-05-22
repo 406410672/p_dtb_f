@@ -101,7 +101,8 @@ task_id : 4
 
 from Master.Task import Const as C
 # get_task = ['_get_task_1','_get_task_2']
-get_task = ['_get_task_3', '_get_task_4']
+# get_task = ['_get_task_3', '_get_task_4']
+get_task = ['_get_task_3']
 
 
 

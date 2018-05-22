@@ -1,22 +1,7 @@
-import requests
+r = {"sib_content" : "\r\nonSibRequestSuccess({\"code\":{\"code\":0,\"message\":\"SUCCESS\"},\"data\":{\"viewer\":{\"admin\":false,\"bs\":\"\",\"buyDomain\":\"buy.taobao.com\",\"buyerId\":\"\",\"cartDomain\":\"cart.taobao.com\",\"cc\":false,\"ctUser\":false,\"lgin\":false,\"serviceTab\":\"ITEM\",\"tkn\":\"eafe6eae57577\"},\"deliveryFee\":{\"data\":{\"areaId\":440100,\"areaName\":\"\\u5E7F\\u4E1C\\u5E7F\\u5DDE\",\"sendCity\":\"\\u5C71\\u4E1C\\u6D4E\\u5B81\",\"serviceInfo\":{\"list\":[{\"id\":\"100_-4\",\"info\":\"\\u5FEB\\u9012 \\u514D\\u8FD0\\u8D39\",\"isDefault\":true,\"markInfo\":\"48\\u5C0F\\u65F6\\u5185\\u53D1\\u8D27\"}]}},\"dataUrl\":\"\\/\\/detailskip.taobao.com\\/json\\/deliveryFee.htm\",\"message\":\"ok\",\"success\":true},\"activity\":{},\"originalPrice\":{\"def\":{\"price\":\"28.00\"}},\"price\":\"28.00\",\"tradeContract\":{\"pay\":[{\"icons\":[\"\\/\\/img.alicdn.com\\/tfs\\/TB1w6O3QFXXXXX4aXXXXXXXXXXX-16-16.png\",\"\\/\\/img.alicdn.com\\/tfs\\/TB1c7HAQFXXXXakXXXXXXXXXXXX-32-32.png\"],\"title\":\"\\u4FE1\\u7528\\u5361\\u652F\\u4ED8\",\"url\":\"\\/\\/payservice.alipay.com\\/intro\\/index.htm?c=xyk\"},{\"icons\":[\"\\/\\/img.alicdn.com\\/tfs\\/TB1dvGWQFXXXXcFaXXXXXXXXXXX-16-16.png\",\"\\/\\/img.alicdn.com\\/tfs\\/TB1FdDlQFXXXXa5XpXXXXXXXXXX-32-32.png\"],\"title\":\"\\u96C6\\u5206\\u5B9D\",\"url\":\"\\/\\/jf.alipay.com\"}],\"service\":[{\"desc\":\"\\u6EE1\\u8DB37\\u5929\\u65E0\\u7406\\u7531\\u9000\\u6362\\u8D27\\u7533\\u8BF7\\u7684\\u524D\\u63D0\\u4E0B\\uFF0C\\u5305\\u90AE\\u5546\\u54C1\\u9700\\u8981\\u4E70\\u5BB6\\u627F\\u62C5\\u9000\\u8D27\\u90AE\\u8D39\\uFF0C\\u975E\\u5305\\u90AE\\u5546\\u54C1\\u9700\\u8981\\u4E70\\u5BB6\\u627F\\u62C5\\u53D1\\u8D27\\u548C\\u9000\\u8D27\\u90AE\\u8D39\\u3002\",\"icons\":[\"\\/\\/img.alicdn.com\\/tps\\/i1\\/T1EQA5FpVgXXceOP_X-16-16.jpg\",null],\"linkType\":1,\"title\":\"7\\u5929\\u65E0\\u7406\\u7531\"},{\"desc\":\"\\u8D2D\\u4E70\\u8BE5\\u5546\\u54C1\\uFF0C\\u6BCF\\u7B14\\u6210\\u4EA4\\u90FD\\u4F1A\\u6709\\u76F8\\u5E94\\u91D1\\u989D\\u6350\\u8D60\\u7ED9\\u516C\\u76CA\\u3002\\u611F\\u8C22\\u60A8\\u7684\\u652F\\u6301\\uFF0C\\u613F\\u516C\\u76CA\\u7684\\u5FEB\\u4E50\\u4F34\\u968F\\u60A8\\u6BCF\\u4E00\\u5929\\u3002\",\"icons\":[\"\\/\\/img.alicdn.com\\/tfs\\/TB1wj5PQFXXXXX8apXXXXXXXXXX-16-16.png\",\"\\/\\/img.alicdn.com\\/tfs\\/TB13FrcQFXXXXaKXVXXXXXXXXXX-32-32.png\"],\"linkType\":2,\"title\":\"\\u516C\\u76CA\\u5B9D\\u8D1D\",\"url\":\"\\/\\/service.taobao.com\\/support\\/knowledge-1117985.htm?spm=0.0.0.0.bOwpfZ&dkey=searchview\"}]},\"dynStock\":{\"holdQuantity\":0,\"sellableQuantity\":722,\"stock\":722,\"stockType\":\"normal\"},\"qrcodeImgUrl\":\"\\/\\/gcodex.alicdn.com\\/qrcode.do?biz_code=xcode&short_name=a.ZRs8&cmd=createSub&param=id:560146370680;scm:20140619.pc_detail.itemId.0\",\"couponActivity\":{\"buyerHasMianxi\":false,\"coupon\":{},\"showMianxiTips\":false},\"soldQuantity\":{\"confirmGoodsCount\":24,\"soldTotalCount\":32},\"promotion\":{\"promoData\":{\"def\":[{\"cart\":true,\"loginPromotion\":false,\"price\":\"19.80\",\"start\":false,\"type\":\"\\u706B\\u70ED\\u4FC3\\u9500\"}]},\"saleDetailMap\":{}}}});",
+}
 
-while True:
-    url = "https://log.mmstat.com/eg.js"
-
-    headers = {
-        'host': "log.mmstat.com",
-        'user-agent': "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0",
-        'accept': "*/*",
-        'accept-language': "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
-        'accept-encoding': "gzip, deflate, br",
-        'referer': "https://item.taobao.com/item.htm?id=561952364548&ns=1&abbucket=20",
-        'cookie': "cna=666",
-        'connection': "keep-alive",
-        'pragma': "no-cache",
-        'cache-control': "no-cache"
-    }
-
-    response = requests.request("GET", url, headers=headers)
-
-    print(response.text)
-    print(response.headers)
+# print(r.get("sib_content"))
+print(r['sib_content'])
+# for item in r.get('items'):
+#     print(item)

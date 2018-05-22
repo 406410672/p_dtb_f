@@ -121,7 +121,6 @@ class GetTaskOperation(BaseOperation):
         _ids = []
         items = []
         response = dict()
-        print(records)
         for record in records:
             num_task += 1
             url = record['detail_url']
