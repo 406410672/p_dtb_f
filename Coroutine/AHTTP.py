@@ -18,7 +18,7 @@ class SessionManager():
 
     async def get_session(self):
         if self.session == None:
-            conn = aiohttp.TCPConnector(ttl_dns_cache=60 * 60, limit=150)
+            conn = aiohttp.TCPConnector(ttl_dns_cache=60 * 60, limit=150, verify_ssl=False)
             session = aiohttp.ClientSession(connector=conn)
             self.session = session
             return session
