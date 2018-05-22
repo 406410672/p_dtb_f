@@ -12,13 +12,10 @@ import sys
 import os
 import json
 import time
-
+sys.path.append(os.path.join(os.path.dirname(__file__), os.path.pardir))
 from Crawler.BaseCrawler import *
-from threading import Thread
 from Crawler.Task.TaskManager import TaskManager as tk
 from multiprocessing import Process
-from gevent.monkey import patch_socket
-import gevent
 
 class CrawlerManager(BaseCrawler):
     def __init__(self):
