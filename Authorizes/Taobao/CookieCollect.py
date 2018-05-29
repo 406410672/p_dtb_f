@@ -60,9 +60,9 @@ class CookieCollect():
 if __name__ == '__main__':
     col = CookieCollect()
     #收集isg
-    isg_list = col.collect_isg(1000)
-    col.redis_client.sadd(ISG_SET, *isg_list)
+    # isg_list = col.collect_isg(1000)
+    # col.redis_client.sadd(ISG_SET, *isg_list)
 
     #取出isg
-    # isg = col.get_isg()
-    # print(isg)
+    isg = col.get_isg()
+    print(isg)
