@@ -32,6 +32,8 @@ class CookieCollect():
         while True:
             try:
                 isg = driver.execute_script(js_content)
+                print(isg)
+                self.__slots__
                 driver.delete_all_cookies()
                 isg_list.append(isg)
                 time.sleep(0)

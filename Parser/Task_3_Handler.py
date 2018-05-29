@@ -13,6 +13,7 @@ import re
 from BaseModule.HTMLParser import HTMLParser as hp
 from BaseModule.HTTPRequest import user_agent
 import asyncio
+
 def config_call_back(config_list, task_info, nid, url, fn):
     result = fn.result()
     result = result.decode(encoding='gb18030')
