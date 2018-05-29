@@ -13,13 +13,14 @@ import time
 import re
 
 from BaseModule.WebDriverManager import WebDriverManager
-
+from BaseModule.Configloader import Configloader
 
 ISG_SET = 'isg_set'
 
 class CookieCollect():
     driverManger = WebDriverManager()
-    redis_client = redis.StrictRedis(host='192.168.6.38', db=15)
+    configloader = Configloader()
+    redis_client = redis.StrictRedis(host=configloader.redis_host, db=configloader.redis_db)
 
     def collect_isg(self, num=100):
         url = 'https://item.taobao.com/item.htm?id=560707511941'
@@ -33,7 +34,6 @@ class CookieCollect():
             try:
                 isg = driver.execute_script(js_content)
                 print(isg)
-                self.__slots__
                 driver.delete_all_cookies()
                 isg_list.append(isg)
                 time.sleep(0)
